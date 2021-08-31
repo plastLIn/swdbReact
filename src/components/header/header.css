@@ -1,0 +1,16 @@
+header {
+    display: flex;
+    margin: .5rem;
+    padding-left: 10px;
+}
+
+.d-flex {
+    list-style: none;
+    margin: 0;
+    padding: .5rem 1rem;
+    border-radius: 3px;
+}
+
+header ul li:hover {
+    background-color: #444;
+}

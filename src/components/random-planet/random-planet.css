@@ -1,0 +1,13 @@
+.random-planet {
+    display: flex;
+}
+
+.planet-image {
+    min-width: 200px;
+    width: 450px;
+    height: auto;
+}
+
+.planet-properties {
+    min-width: 250px;
+}

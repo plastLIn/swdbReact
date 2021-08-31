@@ -1,20 +1,8 @@
-//import React from "react";
-//import ReactDOM from "react-dom"
+import React from "react";
+import ReactDOM from "react-dom"
+import App from "./components/app/app";
 
-const getResource = async (url) => {
-    const res = await fetch(url);
+ReactDOM.render(<App />, document.getElementById('root'));
 
-    if (!res.ok) {
-        throw new Error(`Couldn't fetch ${url}` + `, received ${res.status}`)
-    }
-    const body = await res.json();
-    return body;
-};
-
-getResource('https://swapi.dev/api/people/1/')
-    .then((body) => {
-        console.log(body);
-    })
-    .catch((err) => {
-        console.error('Couldn\'t fetch', err);
-    });
+//netService.getAllPeople().then((data)=>{
+//    data.results.forEach((d) => console.log(d.name));
