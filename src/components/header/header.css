@@ -14,3 +14,7 @@ header {
 header ul li:hover {
     background-color: #444;
 }
+
+li {
+    margin-left: 15px;
+}

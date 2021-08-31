@@ -5,31 +5,76 @@ const apiUrl = 'https://swapi.dev/api';
 async function getResource (url) {
     const res = await fetch(`${apiUrl}${url}`);
     if (!res.ok) {
-        throw new Error(`Couldn't fetch ${url}` + `, received ${res.status}`)
+        throw new Error(`Couldn't fetch ${url}, received ${res.status}`)
     }
     return res.json();
-};
+}
 
-async function getAllPeople () {return await getResource(`/people/`); }
+async function getAllPeople () {
+    const res = await getResource(`/people/`);
+    return res.results.map(transformPerson)
+}
 
 async function getPerson (id) {
-    return await getResource(`/people/${id}/`);
+    const res = await getResource(`/people/${id}/`);
+    return transformPerson(res);
 }
 
 async function getAllPlanets() {
-    return await getResource(`/planets/`);
+    const res = await getResource(`/planets/`);
+    return res.results.map(transformPlanet);
 }
 
 async function getPlanet(id) {
-    return await getResource(`/planets/${ id }`);
+    const res = await getResource(`/planets/${ id }`);
+    return transformPlanet(res);
 }
 
 async function getAllStarships() {
-    return await getResource(`/starships/`);
+    const res = await getResource(`/starships/`);
+    return res.results.map(transformStarship)
 }
 
 async function getStarship(id) {
-    return await getResource(`/starships/${ id }`);
+    const res = await getResource(`/starships/${ id }`);
+    return transformStarship(res);
+}
+
+function extractedId(item) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+}
+
+function transformPlanet(planet){
+    return {
+        id: extractedId(planet),
+        name: planet.name,
+        population: planet.population,
+        rotationPeriod: planet.rotation_period,
+        diameter: planet.diameter
+    }
+}
+
+function transformStarship(starship) {
+    return {
+        id: extractedId(starship),
+        name: starship.name,
+        model: starship.model,
+        manufacturer: starship.manufacturer,
+        costinCredits: starship.costInCredits,
+        length: starship.length,
+        crew: starship.passengers,
+        cargocapacity: starship.cargoCapacity
+    }
+}
+
+function transformPerson (person) {
+    return {
+        id: extractedId(person),
+        name: person.name,
+        birthYear:person.birthYear,
+        eyeColor: person.eyeColor
+    }
 }
 
 export { getAllPeople, getPerson, getAllPlanets, getPlanet, getAllStarships, getStarship };
