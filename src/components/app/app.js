@@ -19,8 +19,8 @@ function App () {
       <div>
           <Header />
           <RandomPlanet />
-          <div className="content-space">
-              <ItemList onPersonSelected={onPersonSelected}/>
+          <div className="row mb2">
+              <ItemList onItemSelected={onPersonSelected}/>
               <PersonDetails onChangePerson={selectedPerson}/>
           </div>
       </div>

@@ -8,7 +8,7 @@ export function ItemList (props) {
 
     const [ people, setPeople ] = useState([]);
     const [ loading, setLoading ] = useState(true);
-    const { onPersonSelected } = props;
+    const { onItemSelected } = props;
 
     useEffect(() => {
         getAllPeople()
@@ -22,9 +22,6 @@ export function ItemList (props) {
             })
     }, []);
 
-    // let innerList = null;
-    // if (items === null) {innerList = (<span>Loading</span>)}
-    // else {innerList = items}
     return(
         <div>
             {loading ? <Spinner/> : null}
@@ -35,7 +32,7 @@ export function ItemList (props) {
                             <li className="list-group-item item-list-custom"
                                 id={ pers.id }
                                 key={ pers.id }
-                                onClick={ () => onPersonSelected(pers.id) }>
+                                onClick={ () => onItemSelected(pers.id) }>
                                 { pers.name }
                             </li>
                         )

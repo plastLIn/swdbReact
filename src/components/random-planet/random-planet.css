@@ -3,6 +3,7 @@
 }
 
 .planet-image {
+    margin-right: 4%;
     min-width: 150px;
     max-width: 300px;
     height: auto;

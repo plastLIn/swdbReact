@@ -2,11 +2,13 @@ import React, {useEffect, useState} from "react";
 import {getPerson} from "../../net-services";
 
 import './personDetails.css'
+import Spinner from "../spinner";
 
 export function PersonDetails (props) {
 
     const [ person, setPerson ] = useState([]);
     const [ loading, setLoading ] = useState(true);
+    const [ updatePerson, setUpdatePerson ] = useState(false);
     const { onChangePerson } = props;
 
     useEffect(() => {
@@ -15,18 +17,22 @@ export function PersonDetails (props) {
                 .then((pers) => {
                     setPerson(pers);
                     setLoading(false);
+                    setUpdatePerson(false);
                 })
         }
+        return setUpdatePerson(true);
 
     }, [onChangePerson]);
 
     return (
     <div className="item-list list-group jumbotron">
-        {loading ? <span>Select Character</span> : null}
-        {!loading ? (
-            <div>
+        {loading ? <span className="select-character">Select Character</span> : null}
+        {updatePerson ? <Spinner /> : null}
+        {(!loading && !updatePerson) ? (
+            <React.Fragment>
                 <img src={`https://starwars-visualguide.com/assets/img/characters/${ person.id }.jpg`}
-                     className="character-image"/>
+                     className="character-image"
+                     alt="Error"/>
                 <ul className="person-details">
                     <h4>{ person.name }</h4>
                     <li className="list-group-item">
@@ -42,7 +48,7 @@ export function PersonDetails (props) {
                         <span>{ person.eyeColor }</span>
                     </li>
                 </ul>
-            </div>
+            </React.Fragment>
         ) : null}
 
     </div>
