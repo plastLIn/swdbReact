@@ -10,13 +10,13 @@ function Header () {
                 <a href="#">SW DB</a>
             </h3>
             <ul className="d-flex">
-                <li>
+                <li className="nav-button">
                     <a href="#">People</a>
                 </li>
-                <li>
+                <li className="nav-button">
                     <a href="#">Planets</a>
                 </li>
-                <li>
+                <li className="nav-button">
                     <a href="#">Starships</a>
                 </li>
             </ul>

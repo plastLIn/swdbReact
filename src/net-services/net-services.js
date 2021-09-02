@@ -72,8 +72,9 @@ function transformPerson (person) {
     return {
         id: extractedId(person),
         name: person.name,
-        birthYear:person.birthYear,
-        eyeColor: person.eyeColor
+        gender: person.gender,
+        birthYear:person.birth_year,
+        eyeColor: person.eye_color
     }
 }
 

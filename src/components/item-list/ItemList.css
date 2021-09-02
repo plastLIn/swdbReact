@@ -1,0 +1,8 @@
+.list-group{
+    min-width: 200px;
+}
+
+.item-list-custom:hover {
+    color: black;
+    background-color: darkgray;
+}
