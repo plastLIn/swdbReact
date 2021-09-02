@@ -4,31 +4,27 @@ import {getPerson} from "../../net-services";
 import './personDetails.css'
 import Spinner from "../spinner";
 
-export function PersonDetails (props) {
-
-    const [ person, setPerson ] = useState([]);
-    const [ loading, setLoading ] = useState(true);
-    const [ updatePerson, setUpdatePerson ] = useState(false);
-    const { onChangePerson } = props;
+export function PersonDetails ({ onChangePerson } ) {
+    const [ person, setPerson ] = useState(null);
+    const [ loading, setLoading ] = useState(Boolean(onChangePerson));
 
     useEffect(() => {
-        if (onChangePerson != null) {
+        if (onChangePerson) {
+            setLoading(true)
             getPerson(onChangePerson)
                 .then((pers) => {
                     setPerson(pers);
                     setLoading(false);
-                    setUpdatePerson(false);
                 })
         }
-        return setUpdatePerson(true);
 
     }, [onChangePerson]);
 
     return (
     <div className="item-list list-group jumbotron">
-        {loading ? <span className="select-character">Select Character</span> : null}
-        {updatePerson ? <Spinner /> : null}
-        {(!loading && !updatePerson) ? (
+        {!person && <span className="select-character">Select Character</span>}
+        {loading && <Spinner /> }
+        {(person && !loading) && (
             <React.Fragment>
                 <img src={`https://starwars-visualguide.com/assets/img/characters/${ person.id }.jpg`}
                      className="character-image"
@@ -49,7 +45,7 @@ export function PersonDetails (props) {
                     </li>
                 </ul>
             </React.Fragment>
-        ) : null}
+        ) }
 
     </div>
     )
