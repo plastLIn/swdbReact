@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {getAllPeople} from "../../net-services";
 
 import './ItemList.css'
+import Spinner from "../spinner";
 
 export function ItemList (props) {
 
@@ -26,8 +27,8 @@ export function ItemList (props) {
     // else {innerList = items}
     return(
         <div>
-            {loading && <span>Loading...</span>}
-            {people.length && (
+            {loading ? <Spinner/> : null}
+            {!loading ? (
                 <ul className="item-list list-group">
                     {people.map((pers) => {
                         return (
@@ -40,7 +41,7 @@ export function ItemList (props) {
                         )
                     })}
                 </ul>
-            )}
+            ) : null}
 
         </div>
     )

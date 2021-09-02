@@ -22,23 +22,29 @@ export function PersonDetails (props) {
 
     return (
     <div className="item-list list-group jumbotron">
-        <img src={`https://starwars-visualguide.com/assets/img/characters/${ person.id }.jpg`}
-                className="character-image"/>
-            <ul className="person-details">
-                <h4>{ person.name }</h4>
-                <li className="list-group-item">
-                    <span>Gender </span>
-                    <span>{ person.gender }</span>
-                </li>
-                <li className="list-group-item">
-                    <span>Birth Year </span>
-                    <span>{ person.birthYear }</span>
-                </li>
-                <li className="list-group-item">
-                    <span>Eye Color </span>
-                    <span>{ person.eyeColor }</span>
-                </li>
-            </ul>
+        {loading ? <span>Select Character</span> : null}
+        {!loading ? (
+            <div>
+                <img src={`https://starwars-visualguide.com/assets/img/characters/${ person.id }.jpg`}
+                     className="character-image"/>
+                <ul className="person-details">
+                    <h4>{ person.name }</h4>
+                    <li className="list-group-item">
+                        <span>Gender </span>
+                        <span>{ person.gender }</span>
+                    </li>
+                    <li className="list-group-item">
+                        <span>Birth Year </span>
+                        <span>{ person.birthYear }</span>
+                    </li>
+                    <li className="list-group-item">
+                        <span>Eye Color </span>
+                        <span>{ person.eyeColor }</span>
+                    </li>
+                </ul>
+            </div>
+        ) : null}
+
     </div>
     )
 }
